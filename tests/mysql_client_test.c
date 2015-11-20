@@ -15336,7 +15336,7 @@ static void test_mysql_insert_id()
 
   myheader("test_mysql_insert_id");
 
-  rc= mysql_query(mysql, "drop table if exists t1");
+  rc= mysql_query(mysql, "drop table if exists t1,t2");
   myquery(rc);
   /* table without auto_increment column */
   rc= mysql_query(mysql, "create table t1 (f1 int, f2 varchar(255), key(f1))");
@@ -18700,7 +18700,8 @@ static void test_progress_reporting()
   myheader("test_progress_reporting");
 
   conn= client_connect(CLIENT_PROGRESS, MYSQL_PROTOCOL_TCP, 0);
-  DIE_UNLESS(conn->client_flag & CLIENT_PROGRESS);
+  if (!(conn->client_flag & CLIENT_PROGRESS))
+    return;
 
   mysql_options(conn, MYSQL_PROGRESS_CALLBACK, (void*) report_progress);
   rc= mysql_query(conn, "set @save=@@global.progress_report_time");

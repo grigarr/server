@@ -1410,7 +1410,7 @@ public:
   Discrete_intervals_list auto_inc_intervals_forced;
   ulonglong limit_found_rows;
   ha_rows    cuted_fields, sent_row_count, examined_row_count;
-  ulong client_capabilities;
+  ulonglong client_capabilities;
   ulong query_plan_flags; 
   uint in_sub_stmt;
   bool enable_slow_log;
@@ -2043,7 +2043,7 @@ public:
   /* Needed by MariaDB semi sync replication */
   Trans_binlog_info *semisync_info;
 
-  ulong client_capabilities;		/* What the client supports */
+  ulonglong client_capabilities;  /* What the client supports */
   ulong max_client_packet_length;
 
   HASH		handler_tables_hash;
@@ -2085,7 +2085,7 @@ public:
     bool       report_to_client;
     /*
       true, if we will send progress report packets to a client
-      (client has requested them, see CLIENT_PROGRESS; report_to_client
+      (client has requested them, see MARIADB_CLIENT_PROGRESS; report_to_client
       is true; not in sub-statement)
     */
     bool       report;
